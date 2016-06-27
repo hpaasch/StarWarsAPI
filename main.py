@@ -15,11 +15,29 @@ def collect_results(response, name_title, detail_url):
             response = requests.get(url).json()
     else:
         output_results(response, name_title, detail_url)
-    
+
 def call_swapi_data(choice):
     url, name_title, detail_url = swapi_dict[choice]
     response = requests.get(url).json()
     collect_results(response, name_title, detail_url)
+    more_info = input("Do you want details? Y/n ")
+    if more_info == 'y':
+        detail_id = int(input("Enter number for details: "))
+        new_url = url + str(detail_id)
+        response = requests.get(new_url).json()
+        print("\n*****DETAILS*****")
+        print('Title:', response['title'])
+        print('Release date:', response['release_date'])
+        print('Director:', response['director'])
+        print("\n*****Opening crawl*****")
+        print(response['opening_crawl'])
+        print("\n*****Characters*****")
+        for item in response['characters']:
+            print(item)
+        print("\n*****Vehicles*****")
+        for item in response['vehicles']:
+            print(item)
+
 
 
 swapi_dict = {
@@ -42,14 +60,6 @@ while True:
         exit()
     call_swapi_data(choice)
 
-
-    # for key, value in response['results'].items():
-    #     print(key, value)
-
-    # more_info = input("Would you like details? Y/n ").lower()
-    # if more_info == 'y':
-    #     person = input("Type in name or title: ").lower()
-    #     print(['results', 'name'])
 
 
 
