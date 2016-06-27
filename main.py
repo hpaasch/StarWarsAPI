@@ -1,24 +1,25 @@
 import requests
 import sys
 
-def results(response, name_title, detail_url):
+def output_results(response, name_title, detail_url):
+    for item in response['results']:
+        print(item[name_title])
+        id = item[detail_url].split('/')
+        print(id[5])
+
+def collect_results(response, name_title, detail_url):
     if response['next']:
         while response['next']:
-            for item in response['results']:
-                print(item[name_title])
-                print(item[detail_url])
+            output_results(response, name_title, detail_url)
             url = response['next']
             response = requests.get(url).json()
     else:
-        for item in response['results']:
-            print(item[name_title])
-            print(item[detail_url])
-
-
-def get_swapi_data(choice):
+        output_results(response, name_title, detail_url)
+    
+def call_swapi_data(choice):
     url, name_title, detail_url = swapi_dict[choice]
     response = requests.get(url).json()
-    results(response, name_title, detail_url)
+    collect_results(response, name_title, detail_url)
 
 
 swapi_dict = {
@@ -39,7 +40,7 @@ while True:
 
     if choice == 0:
         exit()
-    get_swapi_data(choice)
+    call_swapi_data(choice)
 
 
     # for key, value in response['results'].items():
