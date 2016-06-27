@@ -30,7 +30,8 @@ while True:
                 print(item[look_up])
         more_info = input("Would you like details on a character? Y/n ").lower()
         if more_info == 'y':
-            name = input("Type in the character's name: ").lower()
+            person = input("Type in the character's name: ").lower()
+            print(response['name'])
 
     if overall_choice == 2:
         url, look_up = swapi_dict[overall_choice]
