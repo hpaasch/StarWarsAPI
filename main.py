@@ -8,49 +8,60 @@ swapi_dict = {
   3: ["http://swapi.co/api/vehicles/", "name"],
   # 6: "http://swapi.co/api/starships/",
 }
+while True:
+    overall_choice = int(input("""
+    1 Characters
+    2 Films
+    3 Vehicles
+    0 Exit
+    """))
 
-choice = int(input("""
-1 Characters
-2 Films
-3 Vehicles
-"""))
-
-url, look_up = swapi_dict[choice]
-
-if choice == 1:
-    response = requests.get(url).json()
-    if response['next']:
-        while response['next']:
+    if overall_choice == 1:
+        url, look_up = swapi_dict[overall_choice]
+        response = requests.get(url).json()
+        if response['next']:
+            while response['next']:
+                for item in response['results']:
+                    print(item[look_up])
+                url = response['next']
+                response = requests.get(url).json()
+        else:
             for item in response['results']:
                 print(item[look_up])
-            url = response['next']
-            response = requests.get(url).json()
-    else:
-        for item in response['results']:
-            print(item[look_up])
-if choice == 2:
-    response = requests.get(url).json()
-    if response['next']:
-        while response['next']:
-            for item in response['results']:
-                print(item[look_up])
-            url = response['next']
-            response = requests.get(url).json()
-    else:
-        for item in response['results']:
-            print(item[look_up])
+        more_info = input("Would you like details on a character? Y/n ").lower()
+        if more_info == 'y':
+            name = input("Type in the character's name: ").lower()
 
-if choice == 3:
-    response = requests.get(url).json()
-    if response['next']:
-        while response['next']:
+    if overall_choice == 2:
+        url, look_up = swapi_dict[overall_choice]
+        response = requests.get(url).json()
+        if response['next']:
+            while response['next']:
+                for item in response['results']:
+                    print(item[look_up])
+                url = response['next']
+                response = requests.get(url).json()
+        else:
             for item in response['results']:
                 print(item[look_up])
-            url = response['next']
-            response = requests.get(url).json()
-    else:
-        for item in response['results']:
-            print(item[look_up])
+
+    if overall_choice == 3:
+        url, look_up = swapi_dict[overall_choice]
+        response = requests.get(url).json()
+        if response['next']:
+            while response['next']:
+                for item in response['results']:
+                    print(item[look_up])
+                url = response['next']
+                response = requests.get(url).json()
+        else:
+            for item in response['results']:
+                print(item[look_up])
+
+    if overall_choice == 0:
+        break
+
+
 
 
 
