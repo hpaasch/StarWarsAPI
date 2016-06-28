@@ -3,9 +3,8 @@ import sys
 
 def output_results(response, name_title, detail_url):
     for item in response['results']:
-        print(item[name_title])
         id = item[detail_url].split('/')
-        print(id[5])
+        print(id[5], item[name_title])
 
 def collect_results(response, name_title, detail_url):
     if response['next']:
@@ -25,19 +24,27 @@ def call_swapi_data(choice):
         detail_id = int(input("Enter number for details: "))
         new_url = url + str(detail_id)
         response = requests.get(new_url).json()
-        print("\n*****DETAILS*****")
-        print('Title:', response['title'])
-        print('Release date:', response['release_date'])
-        print('Director:', response['director'])
-        print("\n*****Opening crawl*****")
-        print(response['opening_crawl'])
-        print("\n*****Characters*****")
-        for item in response['characters']:
-            print(item)
-        print("\n*****Vehicles*****")
-        for item in response['vehicles']:
-            print(item)
-
+        if url == "http://swapi.co/api/films/":
+            print("\n***** FILM DETAILS *****")
+            print('Title:', response['title'])
+            print('Release date:', response['release_date'])
+            print('Director:', response['director'])
+            print("\n***** Opening crawl *****")
+            print(response['opening_crawl'])
+            print("\n***** Characters *****")
+            for item in response['characters']:
+                print(item)
+            print("\n***** Vehicles *****")
+            for item in response['vehicles']:
+                print(item)
+        elif url == "http://swapi.co/api/people/":
+            print("\n***** CHARACTER DETAILS *****")
+            for key, value in response.items():
+                print('\n', key, ':', value)
+        elif url == "http://swapi.co/api/vehicles/":
+            print("\n***** VEHICLE DETAILS *****")
+            for key, value in response.items():
+                print('\n', key, ':', value)
 
 
 swapi_dict = {
