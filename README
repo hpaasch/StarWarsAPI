@@ -1,0 +1,7 @@
+This is my first interaction with an API. This allows the user to see data from the
+Star Wars API, to see a list of Characters, Films or Vehicles, and then to view
+details on any of those. It's a simple interface in Terminal.
+
+On the detail output, I wrote a long detailed output for the Film detail, and then
+wrote a short, reusable FOR loop for Films and Vehicles. This was partially because
+that worked best for the material and partially to demonstrate I could do both.
