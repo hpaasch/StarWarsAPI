@@ -49,12 +49,10 @@ def call_swapi_data(choice):
 
 swapi_dict = {
   1: ["http://swapi.co/api/people/", "name", "url"],
-  # 2: "http://swapi.co/api/planets/",
   2: ["http://swapi.co/api/films/", "title", "url"],
-  # 4: "http://swapi.co/api/species/",
   3: ["http://swapi.co/api/vehicles/", "name", "url"],
-  # 6: "http://swapi.co/api/starships/",
 }
+
 while True:
     choice = int(input("""
     1 Characters
@@ -66,8 +64,3 @@ while True:
     if choice == 0:
         exit()
     call_swapi_data(choice)
-
-
-
-
-# would you like to get more results? like to see some detail? type 1
